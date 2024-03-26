@@ -1,0 +1,57 @@
+/dts-v1/;
+
+#include "sm6115.dtsi"
+#include "pmi632.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Bengal SoC";
+	compatible = "qcom,bengal";
+	qcom,msm-id = <0x1a1 0x10000 0x1bc 0x10000>;
+	#address-cells = <0x02>;
+	#size-cells = <0x02>;
+	qcom,board-id = <0x00 0x00>;
+
+	aliases {
+		display0 = &framebuffer0;
+	};
+
+	chosen {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+		stdout-path = "display0";
+
+		framebuffer0: framebuffer@5c000000 {
+			compatible = "simple-framebuffer";
+			reg = <0x0 0x5c000000 0x0 0x2800000>;
+			width = <1080>;
+			height = <2340>;
+			stride = <(1080 * 4)>;
+			format = "a8r8g8b8";
+		};
+	};
+
+        reserved_memory: reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+                splash_memory:splash_region {
+                        reg = <0x0 0x5c000000 0x0 0x2800000>;
+                        no-map;
+                        label = "cont_splash_region";
+                };
+
+                ramoops@64000000 {
+                        compatible = "removed-dma-pool", "ramoops";
+			no-map;
+                        reg = <0 64000000 0 0x100000>;
+			record-size = <0x10000>;
+			console-size = <0x60000>;
+			ftrace-size = <0x10000>;
+			pmsg-size = <0x20000>;
+			ecc-size = <16>;
+                };
+	};
+};
