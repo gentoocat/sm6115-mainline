@@ -6,7 +6,7 @@
 / {
 	model = "Xiaomi POCO M3";
 	compatible = "xiaomi,citrus", "qcom,sm6115";
-	qcom,msm-id = <0x1a1 0x10000 0x1bc 0x10000>;
+	qcom,msm-id = <QCOM_ID_SM4250 0x10000 QCOM_ID_SM6115 0x10000>;
 	chassis-type = "handset";
 
 
