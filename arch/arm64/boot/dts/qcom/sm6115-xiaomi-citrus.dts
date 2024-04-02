@@ -65,6 +65,14 @@
 
 &tlmm {
 	gpio-reserved-ranges = <0 4>, <14 4>;
+	
+	sdc2_gate_pin: sdc2-gate-state {
+		pins = "gpio45";
+		function = "gpio";
+		drive-strength = <2>;
+		bias-pull-up;
+		output-high;
+	};
 };
 
 &xo_board {
