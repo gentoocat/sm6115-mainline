@@ -4,12 +4,11 @@
 #include "pmi632.dtsi"
 
 / {
-	model = "Qualcomm Technologies, Inc. Bengal SoC";
-	compatible = "qcom,bengal";
+	model = "Xiaomi POCO M3";
+	compatible = "xiaomi,citrus", "qcom,sm6115";
 	qcom,msm-id = <0x1a1 0x10000 0x1bc 0x10000>;
-	#address-cells = <0x02>;
-	#size-cells = <0x02>;
-	qcom,board-id = <0x00 0x00>;
+	chassis-type = "handset";
+
 
 	aliases {
 		display0 = &framebuffer0;
