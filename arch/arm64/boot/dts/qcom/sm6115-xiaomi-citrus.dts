@@ -74,3 +74,148 @@
 &sleep_clk {
 	clock-frequency = <32764>;
 };
+
+&sdhc_2 {
+  cd-gpios = <&tlmm 88 GPIO_ACTIVE_HIGH>;
+  pinctrl-names = "default", "sleep";
+  pinctrl-0 = <&sdc2_state_on &sdc2_gate_pin>;
+  pinctrl-1 = <&sdc2_state_off>;
+  vmmc-supply = <&pm6125_l22>;
+  vqmmc-supply = <&pm6125_l5>;
+  no-sdio;
+  no-mmc;
+  status = "okay";
+};
+
+&rpm_requests {
+	regulators-0 {
+		compatible = "qcom,rpm-pm6125-regulators";
+
+		pm6125_s6a: s6 {
+			regulator-min-microvolt = <304000>; // true
+			regulator-max-microvolt = <1456000>; // true
+		};
+
+		pm6125_s7a: s7 {
+			regulator-min-microvolt = <1280000>; // true
+			regulator-max-microvolt = <2080000>; // fixed
+		};
+
+		pm6125_s8a: s8 {
+			regulator-min-microvolt = <1064000>; // true
+			regulator-max-microvolt = <1304000>; // true
+		};
+
+		pm6125_l1a: l1 {
+			regulator-min-microvolt = <952000>; // true
+			regulator-max-microvolt = <1152000>; // true
+		};
+
+		pm6125_l4a: l4 {
+			regulator-min-microvolt = <488000>; // true
+			regulator-max-microvolt = <1000000>; // true
+		};
+
+		pm6125_l5a: l5 {
+			regulator-min-microvolt = <1648000>; // true
+			regulator-max-microvolt = <3056000>; // true
+		};
+
+		pm6125_l6a: l6 {
+			regulator-min-microvolt = <576000>; // true
+			regulator-max-microvolt = <656000>; // true
+		};
+
+		pm6125_l7a: l7 {
+			regulator-min-microvolt = <1200000>; // true
+			regulator-max-microvolt = <1304000>; // true
+		};
+
+		pm6125_l8a: l8 {
+			regulator-min-microvolt = <400000>; // true
+			regulator-max-microvolt = <728000>; // true
+		};
+
+		pm6125_l9a: l9 {
+			regulator-min-microvolt = <1800000>; // true
+			regulator-max-microvolt = <2000000>; // true
+		};
+
+		pm6125_l10a: l10 {
+			regulator-min-microvolt = <1704000>; // true
+			regulator-max-microvolt = <1904000>; // true
+		};
+
+		pm6125_l11a: l11 {
+			regulator-min-microvolt = <1768000>; // fixed 
+			regulator-max-microvolt = <1952000>; // true
+			regulator-allow-set-load;
+		};
+
+		pm6125_l12a: l12 {
+			regulator-min-microvolt = <1624000>; // true
+			regulator-max-microvolt = <1984000>; // true
+		};
+
+		pm6125_l13a: l13 {
+			regulator-min-microvolt = <1504000>; // true
+			regulator-max-microvolt = <1952000>; // true
+		};
+
+		pm6125_l14a: l14 {
+			regulator-min-microvolt = <1704000>; // true
+			regulator-max-microvolt = <1904000>; // true
+		};
+
+		pm6125_l15a: l15 {
+			regulator-min-microvolt = <2920000>; // true
+			regulator-max-microvolt = <2920000>; // fixed
+		};
+
+		pm6125_l16a: l16 {
+			regulator-min-microvolt = <1704000>; // true
+			regulator-max-microvolt = <1904000>; // true
+		};
+
+		pm6125_l17a: l17 {
+			regulator-min-microvolt = <1152000>; // true
+			regulator-max-microvolt = <1384000>; // true
+		};
+
+		pm6125_l18a: l18 {
+			regulator-min-microvolt = <1104000>; // true
+			regulator-max-microvolt = <1312000>; // true
+		};
+
+		pm6125_l19a: l19 {
+			regulator-min-microvolt = <1624000>; // true
+			regulator-max-microvolt = <3304000>; // true
+		};
+
+		pm6125_l20a: l20 {
+			regulator-min-microvolt = <1624000>; // true
+			regulator-max-microvolt = <3304000>; // true
+		};
+
+		pm6125_l21a: l21 {
+			regulator-min-microvolt = <2400000>; // true
+			regulator-max-microvolt = <3600000>; // true
+		};
+
+		pm6125_l22a: l22 {
+			regulator-min-microvolt = <2952000>; // true
+			regulator-max-microvolt = <3304000>; // true
+		};
+
+		pm6125_l23a: l23 {
+			regulator-min-microvolt = <3200000>; // true
+			regulator-max-microvolt = <3400000>; // true
+		};
+
+		pm6125_l24a: l24 { 
+			regulator-min-microvolt = <2704000>; // true
+			regulator-max-microvolt = <3600000>; // true
+			regulator-allow-set-load;
+		};
+	};
+};
