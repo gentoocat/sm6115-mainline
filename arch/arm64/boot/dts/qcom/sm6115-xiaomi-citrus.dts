@@ -65,3 +65,11 @@
 &tlmm {
 	gpio-reserved-ranges = <0 4>, <14 4>;
 };
+
+&xo_board {
+	clock-frequency = <19200000>;
+};
+
+&sleep_clk {
+	clock-frequency = <32764>;
+};
