@@ -29,6 +29,7 @@
 			height = <2340>;
 			stride = <(1080 * 4)>;
 			format = "a8r8g8b8";
+			clocks = <&gcc GCC_DISP_HF_AXI_CLK>;
 		};
 	};
 
@@ -54,6 +55,11 @@
 			ecc-size = <16>;
                 };
 	};
+};
+
+&dispcc {
+	/* HACK: disable until a panel driver is ready to retain simplefb */
+	status = "disabled";
 };
 
 &tlmm {
