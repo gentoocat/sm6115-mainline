@@ -57,5 +57,5 @@
 };
 
 &tlmm {
-  gpio-reserved-ranges = <14 4>, <32 4>, <93>;
+  gpio-reserved-ranges = <12 6>, <32 4>, <93>;
 };
