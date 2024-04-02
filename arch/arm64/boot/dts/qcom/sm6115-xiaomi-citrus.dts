@@ -139,6 +139,7 @@
 		pm6125_l7a: l7 {
 			regulator-min-microvolt = <1200000>; // true
 			regulator-max-microvolt = <1256000>; // true
+			regulator-always-on;
 		};
 
 		pm6125_l8a: l8 {
@@ -214,7 +215,8 @@
 
 		pm6125_l22a: l22 {
 			regulator-min-microvolt = <2952000>; // true
-			regulator-max-microvolt = <3304000>; // true
+			regulator-max-microvolt = <2960000>; // true
+			regulator-always-on;
 		};
 
 		pm6125_l23a: l23 {
