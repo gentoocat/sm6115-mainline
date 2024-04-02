@@ -1,6 +1,8 @@
 /dts-v1/;
 
 #include "sm6115.dtsi"
+#include "pm6125.dtsi"
+#include <dt-bindings/arm/qcom,ids.h>
 #include "pmi632.dtsi"
 
 / {
