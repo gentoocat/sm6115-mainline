@@ -45,16 +45,14 @@
                         label = "cont_splash_region";
                 };
 
-                ramoops@64000000 {
-                        compatible = "removed-dma-pool", "ramoops";
-			no-map;
-                        reg = <0 64000000 0 0x100000>;
-			record-size = <0x10000>;
-			console-size = <0x60000>;
-			ftrace-size = <0x10000>;
-			pmsg-size = <0x20000>;
-			ecc-size = <16>;
-                };
+				ramoops@ffc00000 {
+					compatible = "ramoops";
+					reg = <0x0 0xffc00000 0x0 0x100000>;
+					record-size = <0x1000>;
+					console-size = <0x40000>;
+					ftrace-size = <0x20000>;
+					ecc-size = <16>;
+		};
 	};
 };
 
