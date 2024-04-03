@@ -216,6 +216,7 @@
 		pm6125_l22: l22 {
 			regulator-min-microvolt = <2952000>; // true
 			regulator-max-microvolt = <2960000>; // true
+			regulator-allow-set-load;
 			regulator-always-on;
 		};
 
