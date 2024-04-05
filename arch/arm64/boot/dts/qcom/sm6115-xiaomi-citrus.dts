@@ -82,15 +82,16 @@
 };
 
 &sdhc_2 {
-  cd-gpios = <&tlmm 88 GPIO_ACTIVE_HIGH>;
-  pinctrl-names = "default", "sleep";
-  pinctrl-0 = <&sdc2_state_on &sdc2_gate_pin>;
-  pinctrl-1 = <&sdc2_state_off>;
-  vmmc-supply = <&pm6125_l22>;
-  vqmmc-supply = <&pm6125_l5>;
-  no-sdio;
-  no-mmc;
-  status = "okay";
+	cd-gpios = <&tlmm 88 GPIO_ACTIVE_HIGH>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&sdc2_state_on>;
+	pinctrl-1 = <&sdc2_state_off>;
+	vmmc-supply = <&pm6125_l22>;
+	vqmmc-supply = <&pm6125_l5>;
+	/* Lacking L7 as io-bias */
+	no-sdio;
+	no-mmc;
+	status = "okay";
 };
 
 &rpm_requests {
@@ -231,22 +232,42 @@
 	};
 };
 
+/delete-node/ &usb_qmpphy;
+&usb_dwc3 {
+phys = <&usb_hsphy>;
+phy-names = "usb2-phy";
+	ports {
+	/delete-node/ port@1;
+	};
+
+};
+
+&pon_pwrkey {
+	status = "okay";
+};
+
+&pon_resin {
+	linux,code = <KEY_VOLUMEDOWN>;
+	status = "okay";
+};
+
 &usb {
-  status = "okay";
+	status = "okay";
 };
 
 &usb_dwc3 {
-  maximum-speed = "high-speed";
-  dr_mode = "peripheral";
+	maximum-speed = "high-speed";
+	dr_mode = "peripheral";
 
-  phys = <&usb_hsphy>;
-  phy-names = "usb2-phy";
+	phys = <&usb_hsphy>;
+	phy-names = "usb2-phy";
 };
 
 &usb_hsphy {
-  vdd-supply = <&pm6125_l4>;
-  vdda-pll-supply = <&pm6125_l12>;
-  vdda-phy-dpdm-supply = <&pm6125_l15>;
-  status = "okay";
+	vdd-supply = <&pm6125_l4>;
+	vdda-pll-supply = <&pm6125_l12>;
+	vdda-phy-dpdm-supply = <&pm6125_l15>;
+	status = "okay";
 };
+
 
