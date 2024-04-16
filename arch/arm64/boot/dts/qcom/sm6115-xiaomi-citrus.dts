@@ -5,6 +5,10 @@
 #include <dt-bindings/arm/qcom,ids.h>
 #include "pmi632.dtsi"
 
+/delete-node/ &pil_ipa_fw_mem;
+/delete-node/ &pil_ipa_gsi_mem;
+/delete-node/ &pil_gpu_mem;
+
 / {
 	model = "Xiaomi POCO M3";
 	compatible = "xiaomi,citrus", "qcom,sm6115";
@@ -52,13 +56,85 @@
                         record-size = <0x100000>;
                         pmsg-size = <0x200000>;
                         ecc-size = <16>;
+                };
 		};
-	};
+		
+		
+        ibb_vreg: fake-ibb-vreg {
+                compatible = "regulator-fixed";
+                regulator-name = "fakeibb_vreg";
+                regulator-min-microvolt = <4000000>;
+                regulator-max-microvolt = <4000000>;
+        };
+	
+        lab_vreg: fake-lab-vreg {
+                compatible = "regulator-fixed";
+                regulator-name = "fakelab_vreg";
+                regulator-min-microvolt = <4000000>;
+                regulator-max-microvolt = <4000000>;
+        };
+		
+		
 };
 
 &dispcc {
 	/* HACK: disable until a panel driver is ready to retain simplefb */
 	status = "disabled";
+};
+
+&gpu {
+	status = "disabled";
+
+	zap-shader {
+		firmware-name = "qcom/sm6115/Xiaomi/Lemon/a610_zap.mbn";
+	};
+};
+
+&mdss {
+	status = "disabled";
+};
+
+&mdss_dsi0 {
+	vdda-supply = <&pm6125_l18>;
+	status = "disabled";
+
+	panel: panel@0 {
+		compatible = "mdss,nt36672a-truly-v2";
+		reg = <0>;
+
+		reset-gpios = <&tlmm 85 GPIO_ACTIVE_LOW>;
+		vddio-supply = <&pm6125_l9>;
+		vsp-supply = <&lab_vreg>;
+		vsn-supply = <&ibb_vreg>;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&te_active &mdss_dsi_active>;
+
+		port {
+			panel_in: endpoint {
+				remote-endpoint = <&mdss_dsi0_out>;
+			};
+		};
+	};
+};
+
+&mdss_dsi0_out {
+	data-lanes = <0 1 2 3>;
+	remote-endpoint = <&panel_in>;
+};
+
+&mdss_dsi0_phy {
+	status = "disabled";
+};
+
+&pm6125_gpios {
+	vol_up_n: vol-up-n-state {
+		pins = "gpio5";
+		function = "normal";
+		power-source = <0>;
+		bias-pull-up;
+		input-enable;
+	};
 };
 
 &tlmm {
