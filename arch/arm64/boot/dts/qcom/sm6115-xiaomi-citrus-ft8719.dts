@@ -83,23 +83,7 @@
                         ecc-size = <16>;
                 };
 		};
-		
-		
-        ibb_vreg: fake-ibb-vreg {
-                compatible = "regulator-fixed";
-                regulator-name = "fakeibb_vreg";
-                regulator-min-microvolt = <4000000>;
-                regulator-max-microvolt = <4000000>;
-        };
-	
-        lab_vreg: fake-lab-vreg {
-                compatible = "regulator-fixed";
-                regulator-name = "fakelab_vreg";
-                regulator-min-microvolt = <4000000>;
-                regulator-max-microvolt = <4000000>;
-        };
-		
-		
+				
 };
 
 &dispcc {
@@ -120,20 +104,12 @@
 };
 
 &mdss_dsi0 {
-	vdda-supply = <&pm6125_l18>;
-	status = "disabled";
-
-	panel: panel@0 {
-		compatible = "mdss,nt36672a-truly-v2";
+	panel@0 {
+		compatible = "mdss,ft8719-truly-v2";
 		reg = <0>;
-
+	
+		backlight = <&backlight>;
 		reset-gpios = <&tlmm 85 GPIO_ACTIVE_LOW>;
-		vddio-supply = <&pm6125_l9>;
-		vsp-supply = <&lab_vreg>;
-		vsn-supply = <&ibb_vreg>;
-
-		pinctrl-names = "default";
-		pinctrl-0 = <&te_active &mdss_dsi_active>;
 
 		port {
 			panel_in: endpoint {
@@ -190,6 +166,16 @@
 
 &xo_board {
 	clock-frequency = <19200000>;
+};
+
+&pm6125_gpios {
+	vol_up_n: vol-up-n-state {
+		pins = "gpio5";
+		function = "normal";
+		power-source = <0>;
+		bias-pull-up;
+		input-enable;
+	};
 };
 
 &sleep_clk {
@@ -376,6 +362,21 @@ phy-names = "usb2-phy";
 
 	phys = <&usb_hsphy>;
 	phy-names = "usb2-phy";
+};
+
+&ufs_mem_hc {
+	vcc-supply = <&pm6125_l24>;
+	vcc-max-microamp = <600000>;
+	vccq2-supply = <&pm6125_l11>;
+	vccq2-max-microamp = <600000>;
+	vdd-hba-supply = <&pm6125_l18>;
+	status = "okay";
+};
+
+&ufs_mem_phy {
+	vdda-phy-supply = <&pm6125_l4>;
+	vdda-pll-supply = <&pm6125_l12>;
+	status = "okay";
 };
 
 &usb_hsphy {
