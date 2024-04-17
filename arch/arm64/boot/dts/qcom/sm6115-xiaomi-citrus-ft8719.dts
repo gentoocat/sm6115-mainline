@@ -82,6 +82,21 @@
                         pmsg-size = <0x200000>;
                         ecc-size = <16>;
                 };
+		
+                ibb_vreg: fake-ibb-vreg {
+                        compatible = "regulator-fixed";
+                        regulator-name = "fakeibb_vreg";
+                        regulator-min-microvolt = <4000000>;
+                        regulator-max-microvolt = <4000000>;
+                };
+	
+                lab_vreg: fake-lab-vreg {
+                        compatible = "regulator-fixed";
+                        regulator-name = "fakelab_vreg";
+                        regulator-min-microvolt = <4000000>;
+                        regulator-max-microvolt = <4000000>;
+                };
+		
 		};
 				
 };
@@ -95,7 +110,7 @@
 	status = "disabled";
 
 	zap-shader {
-		firmware-name = "qcom/sm6115/Xiaomi/Lemon/a610_zap.mbn";
+		firmware-name = "qcom/sm6115/Xiaomi/Citrus/a610_zap.mbn";
 	};
 };
 
@@ -108,9 +123,13 @@
 		compatible = "mdss,ft8719-truly-v2";
 		reg = <0>;
 	
-		backlight = <&backlight>;
 		reset-gpios = <&tlmm 85 GPIO_ACTIVE_LOW>;
+		vddio-supply = <&pm6125_l9>;
+		vsp-supply = <&lab_vreg>;
+		vsn-supply = <&ibb_vreg>;
 
+		pinctrl-names = "default";
+		pinctrl-0 = <&te_active &mdss_dsi_active>;
 		port {
 			panel_in: endpoint {
 				remote-endpoint = <&mdss_dsi0_out>;
