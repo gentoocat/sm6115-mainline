@@ -893,4 +893,13 @@ config DRM_PANEL_XIAOMI_CITRUS
 	help
 	  Say Y here if you want to enable support for the Xiaomi
 	  POCO M3 panels.
+
+config DRM_PANEL_XIAOMI_CITRUS_FT8719
+	tristate "POCO M3 FT8719 panel"
+	depends on OF
+	depends on DRM_MIPI_DSI
+	depends on BACKLIGHT_CLASS_DEVICE
+	help
+	  Say Y here if you want to enable support for the Xiaomi
+	  POCO M3 FT8719 panel.
 endmenu
